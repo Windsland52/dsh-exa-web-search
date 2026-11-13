@@ -4,6 +4,14 @@
 
 [English](README.en.md)
 
+[![npm](https://img.shields.io/npm/v/dsh-exa-web-search)](https://www.npmjs.com/package/dsh-exa-web-search)
+[![downloads](https://img.shields.io/npm/dm/dsh-exa-web-search)](https://www.npmjs.com/package/dsh-exa-web-search)
+[![Check](https://github.com/Windsland52/dsh-exa-web-search/actions/workflows/check.yml/badge.svg)](https://github.com/Windsland52/dsh-exa-web-search/actions/workflows/check.yml)
+
+[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![Node](https://img.shields.io/badge/node-%3E%3D22.19.0-339933?logo=node.js&logoColor=white)](package.json)
+[![dsh](https://img.shields.io/badge/dsh-0.2.x-4c6)](package.json)
+
 把 Exa 接入 DeepSeek Harness 的内置联网搜索：`web_search` 工具照常用，只是搜索结果改由 Exa 提供。**没有额外工具，不改系统提示词。**
 
 ## 两个通道，自动切换

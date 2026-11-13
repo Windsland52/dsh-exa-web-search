@@ -4,6 +4,14 @@
 
 [中文说明](README.md)
 
+[![npm](https://img.shields.io/npm/v/dsh-exa-web-search)](https://www.npmjs.com/package/dsh-exa-web-search)
+[![downloads](https://img.shields.io/npm/dm/dsh-exa-web-search)](https://www.npmjs.com/package/dsh-exa-web-search)
+[![Check](https://github.com/Windsland52/dsh-exa-web-search/actions/workflows/check.yml/badge.svg)](https://github.com/Windsland52/dsh-exa-web-search/actions/workflows/check.yml)
+
+[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![Node](https://img.shields.io/badge/node-%3E%3D22.19.0-339933?logo=node.js&logoColor=white)](package.json)
+[![dsh](https://img.shields.io/badge/dsh-0.2.x-4c6)](package.json)
+
 Wires Exa into DeepSeek Harness's built-in web search: keep using the `web_search` tool as usual, but the results now come from Exa. **No extra tools, no system-prompt changes.**
 
 ## Two channels, switched automatically
