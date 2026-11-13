@@ -2,6 +2,14 @@
   "name": "dsh-exa-web-search",
   "version": "0.1.0",
   "description": "Exa web search for DeepSeek Harness: uses the official Exa API when a key is available and a keyless public channel otherwise, switching automatically. No extra tools, no system-prompt changes.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Windsland52/dsh-exa-web-search.git"
+  },
+  "homepage": "https://github.com/Windsland52/dsh-exa-web-search#readme",
+  "bugs": {
+    "url": "https://github.com/Windsland52/dsh-exa-web-search/issues"
+  },
   "type": "module",
   "main": "lib/index.js",
   "scripts": {
