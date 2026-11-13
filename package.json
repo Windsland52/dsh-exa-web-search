@@ -1,0 +1,73 @@
+{
+  "name": "dsh-exa-web-search",
+  "version": "0.1.0",
+  "description": "Exa web search for DeepSeek Harness: uses the official Exa API when a key is available and a keyless public channel otherwise, switching automatically. No extra tools, no system-prompt changes.",
+  "type": "module",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "node tests/run-tests.mjs && node tests/manifest.mjs",
+    "test:install": "node tests/install-smoke.mjs",
+    "test:live": "node tests/live-search.mjs"
+  },
+  "icon": "./icon.png",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json"
+  },
+  "files": [
+    "lib",
+    "locale",
+    "cordis.patch.yml",
+    "README.md",
+    "README.en.md",
+    "icon.png",
+    "LICENSE"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "exa",
+    "exa-search",
+    "web-search",
+    "keyless",
+    "anonymous",
+    "api-key",
+    "search-provider"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-ui-plugin-manager",
+        "@deepseek-ai/dsh-client-locale"
+      ]
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@deepseek-ai/dsh-web-search-exa": "^0.2.2-rc.1",
+    "@deepseek-ai/schemastery": "~3.19.0"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-launch-environment": ">=0.2.0-rc.1 <0.3.0-0 || >=0.2.1-alpha.1 <0.3.0-0 || >=0.2.2-alpha.2 <0.3.0-0",
+    "@deepseek-ai/dsh-web": ">=0.2.0-rc.1 <0.3.0-0 || >=0.2.1-alpha.1 <0.3.0-0 || >=0.2.2-alpha.2 <0.3.0-0"
+  },
+  "devDependencies": {
+    "@deepseek-ai/dsh-launch-environment": "0.2.2-rc.1",
+    "@deepseek-ai/dsh-web": "0.2.2-rc.1"
+  },
+  "engines": {
+    "node": ">=22.19.0",
+    "dsh": ">=0.2.0-rc.1 <0.3.0-0 || >=0.2.1-alpha.1 <0.3.0-0 || >=0.2.2-alpha.2 <0.3.0-0"
+  }
+}

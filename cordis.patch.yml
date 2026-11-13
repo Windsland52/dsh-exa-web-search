@@ -1,0 +1,24 @@
+# dsh-exa-web-search bundle patch.
+#
+# Two patches in this layer:
+#
+# 1. Insert this plugin's own row (registers provider id `exa`).
+# 2. Override the base `web` row to select it. A non-insert patch that names
+#    an existing row id replaces that row's fields — this is the same idiom
+#    official bundle layers use (`dsh-web-app` overrides base's `tool-web`
+#    and others). `config` is replaced wholesale, never merged; the `web`
+#    row only defines `searchProvider`/`fetchProvider`, so restating both is
+#    complete.
+#
+# Because selection lives in THIS bundle's patch — not a runtime write and
+# not the user's own cordis.patch.yml — uninstalling the bundle removes the
+# pin automatically. No `searchProvider`/`fetchProvider` residue is left
+# behind in the user layer the way dsh-free-search's runtime takeover did.
+- insert:
+    - id: exa-web-search
+      name: dsh-exa-web-search
+
+- id: web
+  config:
+    searchProvider: exa
+    fetchProvider: http
