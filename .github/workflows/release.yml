@@ -168,3 +168,45 @@ jobs:
           # Provenance is explicit: it comes from the same OIDC identity, and losing it silently
           # would be a supply-chain regression.
           npm publish "${tarball}" --access public --provenance --loglevel verbose
+
+  release:
+    needs: [pack, publish]
+    if: github.repository == 'Windsland52/dsh-exa-web-search'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # The notes are the tagged tree's own CHANGELOG sections, so both changelogs and the
+      # extractor are read from the tag rather than from a branch head.
+      # Shape follows the Host's own releases: a language switcher on top, Chinese first, then
+      # English below it, each block anchored so the switcher can jump to it.
+      - name: Create GitHub release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          if gh release view "${VERSION}" >/dev/null 2>&1; then
+            echo "Release ${VERSION} already exists; skipping creation."
+            exit 0
+          fi
+          version="${VERSION#v}"
+          notes="${RUNNER_TEMP}/release-notes.md"
+          {
+            printf '[中文](#cn-%s) | [English](#en-%s)\n\n' "${version}" "${version}"
+            printf '<h3 id="cn-%s">中文</h3>\n\n' "${version}"
+            node scripts/release-notes.mjs "${version}" CHANGELOG.md
+            printf '\n<h3 id="en-%s">English</h3>\n\n' "${version}"
+            node scripts/release-notes.mjs "${version}" CHANGELOG.en.md
+            printf '\n'
+          } > "${notes}"
+          # The tag already exists (pushing it triggered this workflow), so --verify-tag makes gh
+          # fail instead of silently creating the release on the checked-out commit.
+          gh release create "${VERSION}" --verify-tag \
+            --title "${VERSION}" --notes-file "${notes}"
